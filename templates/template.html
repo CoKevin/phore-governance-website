@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Phore Governance</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <section>
+    <div class = "box2 info">
+      <h3>Please check those informations</h3>
+      Last update (UTC): {{time_now}}<br>
+      Current Block: {{current_block}}<br>
+      Next Superblock: {{next_superblock}}<br>
+      Expected date next Superblock (UTC): {{time_next_superblock}}
+    </div>
+  </section>
+  <section>
+    <div class = "box gray">
+    <h3>How to vote with all your masternodes:</h3>
+    <ol>
+      <li><p font-style: italic>Unlock your wallet</p></li>
+      <li>Open Debug console and type<br>
+        <ul>
+          <li> "mnbudgetvote many proposal_hash yes" <br>if you want to vote for approve </li>
+          <li>"mnbudgetvote many proposal_hash no" <br>if you want to vote against.</li>
+        </ul>
+      </li>
+      (proposal_hash must be replaced by the actual proposal hash)
+    </ol>
+  </div>
+  </section>
+  
+  <section>
+  <!--for demo wrap-->
+  <h1>Proposal Information</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th colspan = "3">Proposal Hash</th>
+          <th colspan = "2">Proposal Name</th>
+          <th>URL</th>
+          <th colspan = "2">Start</th>
+          <th colspan = "2">End</th>
+          <th colspan = "3">Payment Address</th>
+          <th>Yeas</th>
+          <th>Nays</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        {% set counter = 0 -%}
+        {% for proposal in proposals -%}
+          <tr>
+            <td colspan = "3">{{proposal['Hash']}}</td>
+            <td colspan = "2">{{proposal['Name']}}</td>
+            <td><a target="_blank" href="{{proposal['URL']}}">url</a></td>
+            <td colspan = "2">{{proposal['BlockStart']}}</td>
+            <td colspan = "2">{{proposal['BlockEnd']}}</td>
+            <td colspan = "3"> <a target="_blank" href="https://chainz.cryptoid.info/phr/search.dws?q={{proposal['PaymentAddress']}}"> {{proposal['PaymentAddress']}}</a></td>
+            <td>{{proposal['Yeas']}}</td>
+            <td>{{proposal['Nays']}}</td>
+          </tr>
+        {% set counter = counter + 1 -%}
+        {% endfor -%}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  Note that url may not work properly if people didn't provide a real url.<br>
+  This website doesn't look good. I'll upgrade when I find the time. For now it must suffice, but if you have any ideas or features you would like me to add, just drop it in the <a target="_blank" href="https://forum.phore.io/t/governance-and-smart-contracts/67"> forum thread</a>, I'll read it.
+</section>
+</body>
+
+</html>
